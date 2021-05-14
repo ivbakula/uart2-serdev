@@ -1,0 +1,52 @@
+From cdcd80c36ff15f6814ae9320e91575197c5e2286 Mon Sep 17 00:00:00 2001
+From: Ivan Bakula <wamreu@gmail.com>
+Date: Sun, 2 May 2021 22:06:39 +0100
+Subject: [PATCH] arch: arm: boot: dts: bcm2711. Add new serial device
+
+Add new slave serial device hooked up to uart2. This patch is for raspberry-pi 4  
+
+Signed-off-by: Ivan Bakula <wamreu@gmail.com>
+---
+ arch/arm/boot/dts/bcm2711-rpi-4-b.dts | 13 +++++++++++++
+ arch/arm/boot/dts/bcm2711.dtsi        |  1 -
+ 2 files changed, 13 insertions(+), 1 deletion(-)
+
+diff --git a/arch/arm/boot/dts/bcm2711-rpi-4-b.dts b/arch/arm/boot/dts/bcm2711-rpi-4-b.dts
+index 984c31db0..8e025b831 100644
+--- a/arch/arm/boot/dts/bcm2711-rpi-4-b.dts
++++ b/arch/arm/boot/dts/bcm2711-rpi-4-b.dts
+@@ -306,6 +306,19 @@
+ 	status = "okay";
+ };
+ 
++&uart2 {
++	pinctrl-names = "default";
++	pinctrl-0 = <&uart2_ctsrts_gpio2 &uart2_gpio0>;
++	uart-has-rtscts;
++	status = "okay";
++
++	serialdev_test {
++		compatible = "acme,ttta1234";
++		max-speed = <9600>;
++		gpiod-ctrl = <&gpio 16 0>;
++		status = "okay";
++	};
++};
+ &vchiq {
+ 	interrupts = <GIC_SPI 34 IRQ_TYPE_LEVEL_HIGH>;
+ };
+diff --git a/arch/arm/boot/dts/bcm2711.dtsi b/arch/arm/boot/dts/bcm2711.dtsi
+index e8434edc2..2e7114276 100644
+--- a/arch/arm/boot/dts/bcm2711.dtsi
++++ b/arch/arm/boot/dts/bcm2711.dtsi
+@@ -134,7 +134,6 @@
+ 				 <&clocks BCM2835_CLOCK_VPU>;
+ 			clock-names = "uartclk", "apb_pclk";
+ 			arm,primecell-periphid = <0x00241011>;
+-			status = "disabled";
+ 		};
+ 
+ 		uart3: serial@7e201600 {
+-- 
+2.20.1
+

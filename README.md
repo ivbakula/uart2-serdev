@@ -1,7 +1,7 @@
 # UART2
-- simple slave character device on uart2 for raspberry pi 4B
-- the device is defined in device tree. For some odd reason it doesn't work when
-  defined in device tree overlay
+- Simple slave character device on uart2 for raspberry pi 4B
+- The device is defined in the device tree. For some odd reason it doesn't work
+  when defined in device tree overlay
 - The device driver is built upon serdev bus and currently supports just writing to
   the device. 
 
@@ -12,19 +12,19 @@
 * rts - GPIO 3
 * gnd - pin 6, 9, 14, 20, 25, 30, 34, 39
 
-To test this device and module simply hook up logic analyzer (or arduino) to GPIO
+To test this device and module, simply hook up logic analyzer (or arduino) to GPIO
 pin 0 and GND and run:
 ```bash
 $ sudo sh -c 'echo test > /dev/serdev'
 ```
 Recommended readings:
 * <linux_source_root>/Documentation/devicetree/usage-model.rst
+* <linux_source_root>/arch/arm/boot/dts/bcm2711.dtsi
+* <linux_source_root>/arch/arm/boot/dts/bcm2711-rpi-4-b.dts
 * https://elinux.org/Device_Tree_Reference
 * https://www.raspberrypi.org/documentation/configuration/device-tree.md
 
-For more on serdev bus, check out these drivers:
-* <linux_source_root>/arch/arm/boot/dts/bcm2711.dtsi
-* <linux_source_root>/arch/arm/boot/dts/bcm2711-rpi-4-b.dts
+For more on serdev bus, check out these files:
 * <linux_source_root>/drivers/tty/serdev/core.c
 * <linux_source_root>/include/linux/serdev.h
 * <linux_source_root>/drivers/nfc/s3fwrn5/uart.c

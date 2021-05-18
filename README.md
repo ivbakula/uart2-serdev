@@ -32,7 +32,7 @@ For more on serdev bus, check out these files:
 * <linux_source_root>/drivers/bluetooth/hci_nokia.c
 * <linux_source_root>/drivers/nfc/pn533/uart.c
 
-# Building on raspberri pi (raspbian buster) 
+# Building on raspberry pi (raspbian buster) 
 
 Install dependencies:
 ```bash
@@ -46,7 +46,7 @@ $ git clone https://github.com/raspberrypi/linux.git
 
 Patch and build device tree
 ```bash
-$ cd linux			# enter raspberry pi linux kernel source tree
+$ cd linux			# cd into raspberry pi linux kernel source tree
 $ git branch uart
 $ git checkout uart
 $ git am uart2_device.diff	# apply patch ./uart2_device.diff
@@ -63,6 +63,6 @@ Add this line to /boot/config.txt
 device_tree = bcm2711-uart2-slave-rpi-4-b.dtb
 ```
 # TODO
-* reading from file
+* reading from the device 
 * set baud at runtime 
-* hook it up to some real device 
+* hook it up to some real hardware 
